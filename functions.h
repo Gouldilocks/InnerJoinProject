@@ -13,5 +13,6 @@ using std::ofstream;
 vector<vector<string>> readTable(ifstream &file);
 void writeTable(ofstream &file, vector<vector<string>> &table);
 vector<vector<string>> innerJoin(vector<vector<string>> leftTable, vector<vector<string>> rightTable);
+int findIndex(string toFind, vector<string> vector);
 
 #endif //PROGRAM3_FUNCTIONS_H

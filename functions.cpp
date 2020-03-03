@@ -2,7 +2,6 @@
 #include "functions.h"
 #include <vector>
 #include <sstream>
-
 using namespace std;
 
 //given a file, read the file and put it into a 2 dimensional vector.
@@ -35,40 +34,23 @@ void writeTable (ofstream &file, vector<vector<string>> &table) {
 	}
 }
 vector<vector<string>> innerJoin (vector<vector<string>> leftTable, vector<vector<string>> rightTable) {
-	string idToMatch = "";
-//for (int i = 0; i < leftTable.size(); i ++){ // for each left table vector, do this.
-//	idToMatch = leftTable.at(i).at(0); // get the id to match from the
-//	for (int x = 0; x < rightTable.size(); x ++ ){ //for each right table vector, do this.
-//		if (rightTable.at(x).at(0).compare(idToMatch) == 0){ // if the ids are the same, then do this.
-//			for (int p = 1; p < rightTable.at(x).size(); p++){ // for each value in this id# (except 0), do this.
-//				leftTable.at(i).push_back(rightTable.at(x).at(p));
-//			}
-//		} else continue; // if the strings are not the same, keep going through the ids.
-//	}
-//}
-	vector <vector<string>> returnMe(leftTable.size ());
-	vector <string> commons;
+	//rightTable.erase(rightTable.begin());
+
+	vector <string> erasable;
+	vector <vector<string>> returnMe;
 	for (int z = 0; z < rightTable.size (); z++) {
 		for (int i = 0; i < leftTable.size (); i++) {
-			if (leftTable.at (i).at(0) == rightTable.at(z).at(0)){
-				commons.push_back(rightTable.at(z).at(0));
+			if (leftTable.at (i).at(0) == rightTable.at(z).at(0)){ // if the id's are the same, do this.
+
+				erasable = leftTable.at(i);
+				for (int x = 0; x < rightTable.at(z).size(); x++){
+						erasable.push_back(rightTable.at(z).at(x));
+					}
+				erasable.erase(erasable.begin()+leftTable.at(1).size());
+				returnMe.push_back(erasable);
+
 			}
 		}
 	}
-	for (int i = 0; i < commons.size (); i++){
-		returnMe.at(i).push_back(commons.at(i));
-	}
-	for (int x = 1; x < leftTable.at(0).size(); x++) {
-		for (int i = 0; i < leftTable.size (); i++) { // this loop makes all the ids in the returnMe vector.
-			returnMe.at (i).push_back (leftTable.at (i).at (x));
-		}
-	}
-	for (int x = 1; x < rightTable.at(0).size(); x++) {
-		for (int i = 0; i < rightTable.size (); i++) { // this loop makes all the ids in the returnMe vector.
-			returnMe.at (i).push_back (rightTable.at (i).at (x));
-		}
-	}
-
 	return returnMe;
-
 }
