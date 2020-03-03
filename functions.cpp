@@ -26,28 +26,26 @@ vector<vector<string>> readTable (ifstream &file) {
 
 void writeTable (ofstream &file, vector<vector<string>> &table) {
 	for (int i = 0; i < table.size (); i++) {
-		cout << table.at (i).at (0);
+		file << table.at (i).at (0);
 		for (int x = 1; x < table.at (i).size (); x++) {
-			cout << "," << table.at (i).at (x);
+			file << "," << table.at (i).at (x);
 		}
-		cout << endl;
+		file << endl;
 	}
 }
 vector<vector<string>> innerJoin (vector<vector<string>> leftTable, vector<vector<string>> rightTable) {
-	//rightTable.erase(rightTable.begin());
-
-	vector <string> erasable;
+	vector <string> toAdd;
 	vector <vector<string>> returnMe;
 	for (int z = 0; z < rightTable.size (); z++) {
 		for (int i = 0; i < leftTable.size (); i++) {
 			if (leftTable.at (i).at(0) == rightTable.at(z).at(0)){ // if the id's are the same, do this.
 
-				erasable = leftTable.at(i);
+				toAdd = leftTable.at(i);
 				for (int x = 0; x < rightTable.at(z).size(); x++){
-						erasable.push_back(rightTable.at(z).at(x));
+						toAdd.push_back(rightTable.at(z).at(x));
 					}
-				erasable.erase(erasable.begin()+leftTable.at(1).size());
-				returnMe.push_back(erasable);
+				toAdd.erase(toAdd.begin()+leftTable.at(1).size());
+				returnMe.push_back(toAdd);
 
 			}
 		}

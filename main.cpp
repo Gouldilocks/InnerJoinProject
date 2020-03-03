@@ -8,6 +8,8 @@ int main () {
 	ofstream Results;
 	ifstream Users;
 	ifstream Cars;
+
+
 	Cars.open ("CarsTable.csv");
 	//Make all of the vectors
 	vector<vector<string>> cars = readTable (Cars);
@@ -17,13 +19,7 @@ int main () {
 	Users.close();
 	vector<vector<string>> join = innerJoin (users, cars);
 
-//	for(int i = 0; i < cars.size(); i++){
-//		cout << cars.at(i).at(0);
-//		for (int x = 1; x < cars.at(i).size(); x++){
-//			cout << "," << cars.at(i).at(x);
-//		}
-//		cout << endl;
-//	}
+
 	Results.open ("Results.csv");
 	//Print out the results
 	writeTable (Results, join);
