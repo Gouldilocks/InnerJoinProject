@@ -19,7 +19,7 @@ vector<vector<string>> readTable (ifstream &file) {
 			vectorOfLine.push_back (line);
 		}
 		returnMe.push_back (vectorOfLine);//put the newly found vector of a line into the returning vector.
-		vectorOfLine.resize (0);//resize the vector so that the next line values are not stored here.
+		vectorOfLine.clear ();//resize the vector so that the next line values are not stored here.
 	}
 	return returnMe;
 }
@@ -38,7 +38,7 @@ vector<vector<string>> innerJoin (vector<vector<string>> leftTable, vector<vecto
 
 	vector <string> erasable;
 	vector <vector<string>> returnMe;
-	for (int z = 0; z < rightTable.size (); z++) {
+	for (int z = 0; z < rightTable.size (); z++) { // these two for loops will iterate through every element of both vectors
 		for (int i = 0; i < leftTable.size (); i++) {
 			if (leftTable.at (i).at(0) == rightTable.at(z).at(0)){ // if the id's are the same, do this.
 
